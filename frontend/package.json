@@ -10,18 +10,20 @@
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,md,json}\" --config ./.prettierrc.json"
   },
+  "dependencies": {
+    "react": "^18.2.0", // Example, ensure you have react and react-dom
+    "react-dom": "^18.2.0" // Example
+  },
   "devDependencies": {
-    "@eslint/js": "^9.2.0",
-    "eslint": "^9.2.0",
-    "eslint-plugin-react": "^7.34.1", // Ensure this version is compatible with ESLint 9 flat config
-    "typescript-eslint": "^7.8.0"
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
-    "prettier": "^3.5.3",
-    "typescript": "~5.8.3",
-    "typescript-eslint": "^8.32.1",
-    "vite": "^6.3.5"
+    "@eslint/js": "^9.3.0", // or latest
+    "eslint": "^9.3.0", // or latest
+    "eslint-config-prettier": "^9.1.0", // For Prettier compatibility
+    "eslint-plugin-react": "^7.34.2", // Ensure compatibility with ESLint 9 flat config
+    "eslint-plugin-react-hooks": "^4.6.2", // For React Hooks rules
+    "eslint-plugin-react-refresh": "^0.4.7", // For Vite/React Fast Refresh
+    "prettier": "^3.2.5", // or latest
+    "typescript": "~5.4.5", // or latest compatible with your project
+    "typescript-eslint": "^7.10.0", // or latest
+    "vite": "^5.2.0" // or latest
   }
 }
