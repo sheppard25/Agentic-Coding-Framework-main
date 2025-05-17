@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "projectName": "ReactGRBL Controller",
+  "projectType": "Application Web/Desktop React avec Backend Python",
+  "projectObjective": "Créer une interface moderne et intuitive pour contrôler les graveurs laser et CNC utilisant le firmware GRBL",
+  "prdDocumentPath": "project_prd.md",
+  "tasksDocumentPath": "tasks/tasks.json",
+  "currentWorkflowPhase": "task_planning",
+  "lastCompletedStep": "deploymentPlanDetailed",
+  "pendingAction": {
+    "mcpServer": null,
+    "toolName": null,
+    "arguments": null,
+    "expectedResponseType": null
+  },
+  "userInputHistory": {
+    "initialIdea": "je voudrais un controleur GRBL complet gestion du graveur connexion gestion des fichiers a graver sur une grille X Y graduée tous les 20 , les images doivent etre deplacables et zoomable le 0,0 de ma machine doit etre en haut a droite,le projet doit etre en react javascript et un peu de python"
+  },
+  "currentContext": {
+    "activeEpicId": null,
+    "activeTaskId": null,
+    "filesBeingWorkedOn": ["idea_document.md"]
+  },
+  "errorState": {
+    "hasError": false,
+    "errorMessage": null,
+    "errorTimestamp": null,
+    "recoverySuggestion": null
+  },
+  "documents": {
+    "idea_document": "idea_document.md",
+    "market_research": "market_research.md",
+    "core_concept": "core_concept.md",
+    "project_prd": "project_prd.md"
+  }
+}

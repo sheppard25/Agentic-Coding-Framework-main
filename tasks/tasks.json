@@ -1,0 +1,598 @@
+{
+  "epics": [
+    {
+      "id": "epic_001",
+      "title": "Project Setup & Foundation",
+      "description": "Initial setup of the project environment, repositories, and foundational tools.",
+      "status": "To Do",
+      "priority": "High",
+      "tasks": [
+        {
+          "id": "task_001_001",
+          "title": "Initialize Git repository and define branching strategy",
+          "description": "Setup Git, .gitignore, and document branching model (e.g., GitFlow).",
+          "status": "Done",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 2,
+          "dependencies": []
+        },
+        {
+          "id": "task_001_002",
+          "title": "Setup Python backend project structure (FastAPI/Flask)",
+          "description": "Create initial directories, virtual environment, and basic app setup.",
+          "status": "Done",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 4,
+          "dependencies": ["task_001_001"]
+        },
+        {
+          "id": "task_001_003",
+          "title": "Setup React frontend project structure (Create React App or Vite)",
+          "description": "Initialize React project, setup basic folder structure for components, services, etc.",
+          "status": "Done",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 4,
+          "dependencies": ["task_001_001"]
+        },
+        {
+          "id": "task_001_004",
+          "title": "Configure linters and formatters (ESLint, Prettier, Flake8, Black)",
+          "description": "Setup and configure linting and formatting tools for both frontend and backend.",
+          "status": "Done",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 3,
+          "dependencies": ["task_001_002", "task_001_003"]
+        },
+        {
+          "id": "task_001_005",
+          "title": "Setup initial CI/CD pipeline (e.g., GitHub Actions)",
+          "description": "Basic pipeline for running linters and tests on push/PR.",
+          "status": "In Progress",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 5,
+          "dependencies": ["task_001_004"]
+        }
+      ]
+    },
+    {
+      "id": "epic_002",
+      "title": "Backend Core: GRBL Communication & API",
+      "description": "Development of the core backend functionalities including GRBL communication, API endpoints, and database interaction.",
+      "status": "To Do",
+      "priority": "High",
+      "tasks": [
+        {
+          "id": "task_002_001",
+          "title": "Implement GRBL connection module",
+          "description": "Develop backend module for listing available serial ports, connecting to a GRBL device, and disconnecting. Handle connection errors.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 8,
+          "dependencies": ["task_001_002"]
+        },
+        {
+          "id": "task_002_002",
+          "title": "Develop GRBL command sending and response parsing logic",
+          "description": "Implement functionality to send G-code commands and GRBL specific commands (e.g., '$$', '$I') to the connected device and parse 'ok'/error responses.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 10,
+          "dependencies": ["task_002_001"]
+        },
+        {
+          "id": "task_002_003",
+          "title": "Implement GRBL real-time status reporting parser",
+          "description": "Develop logic to continuously parse real-time status reports (e.g., from '?') and other unsolicited messages from GRBL (e.g., alarms, feedback messages).",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 8,
+          "dependencies": ["task_002_001"]
+        },
+        {
+          "id": "task_002_004",
+          "title": "Design and implement database models",
+          "description": "Implement database models (Machine, Project, File, Setting) using an ORM like SQLAlchemy, based on the database_schema.md. Include Pydantic models for validation.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 12,
+          "dependencies": ["task_001_002"]
+        },
+        {
+          "id": "task_002_005",
+          "title": "Develop API endpoints for Machine configuration (CRUD)",
+          "description": "Create RESTful API endpoints for creating, reading, updating, and deleting machine configurations as defined in api_specification.md.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 8,
+          "dependencies": ["task_002_004"]
+        },
+        {
+          "id": "task_002_006",
+          "title": "Develop API endpoints for Project management (CRUD)",
+          "description": "Create RESTful API endpoints for creating, reading, updating, and deleting projects as defined in api_specification.md.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 8,
+          "dependencies": ["task_002_004"]
+        },
+        {
+          "id": "task_002_007",
+          "title": "Implement WebSocket endpoint for real-time updates",
+          "description": "Develop a WebSocket endpoint to stream GRBL status, console messages, and other real-time data to the frontend.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 10,
+          "dependencies": ["task_002_003"]
+        },
+        {
+          "id": "task_002_008",
+          "title": "Develop a mock/simulated GRBL controller for testing",
+          "description": "Create a Python-based GRBL simulator that can mimic basic GRBL responses to commands and status queries. This will be essential for backend and E2E testing without a physical device.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 12,
+          "dependencies": ["task_002_001", "task_002_002"]
+        }
+      ]
+    },
+    {
+      "id": "epic_003",
+      "title": "Frontend Core: UI/UX & State Management",
+      "description": "Development of the core frontend UI components, user experience, and state management.",
+      "status": "To Do",
+      "priority": "High",
+      "tasks": [
+        {
+          "id": "task_003_001",
+          "title": "Setup global state management (e.g., Zustand or Redux Toolkit)",
+          "description": "Choose and implement a global state management solution for handling application-wide state like connection status, machine state, and user settings.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 8,
+          "dependencies": ["task_001_003"]
+        },
+        {
+          "id": "task_003_002",
+          "title": "Implement basic application layout",
+          "description": "Develop the main application layout components: Header (for branding/navigation), Sidebar (for main controls/navigation), Main Content Area, and a Footer/Status Bar.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 10,
+          "dependencies": ["task_001_003"]
+        },
+        {
+          "id": "task_003_003",
+          "title": "Setup routing for main application views",
+          "description": "Implement client-side routing (e.g., using React Router) for navigating between different sections of the application (e.g., Dashboard, Machine Control, File Management, Settings).",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 6,
+          "dependencies": ["task_003_002"]
+        },
+        {
+          "id": "task_003_004",
+          "title": "Implement UI theme and styling",
+          "description": "Choose and implement a UI component library (e.g., Material-UI, Ant Design) or a styling approach (e.g., Tailwind CSS, Styled Components). Define a consistent theme (colors, typography, spacing).",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 8,
+          "dependencies": ["task_001_003"]
+        },
+        {
+          "id": "task_003_005",
+          "title": "Develop reusable UI components",
+          "description": "Create a library of common reusable UI components such as Buttons, InputFields, Modals, Notifications/Toasts, Loaders, etc., based on the chosen styling approach.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 12,
+          "dependencies": ["task_003_004"]
+        },
+        {
+          "id": "task_003_006",
+          "title": "Implement WebSocket client for real-time communication",
+          "description": "Develop a service or hook to establish and manage the WebSocket connection to the backend for receiving real-time updates (GRBL status, console messages). Integrate with global state.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 8,
+          "dependencies": ["task_003_001", "task_002_007"]
+        },
+        {
+          "id": "task_003_007",
+          "title": "Create initial API service layer for frontend-backend communication",
+          "description": "Develop a set of functions/services to handle HTTP requests to the backend API endpoints (e.g., using Axios or fetch). Manage request/response handling and error states.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 8,
+          "dependencies": ["task_001_003", "task_002_005"]
+        }
+      ]
+    },
+    {
+      "id": "epic_004",
+      "title": "Feature: Machine Connection & Control",
+      "description": "Implementing features related to connecting to the GRBL machine and basic controls.",
+      "status": "To Do",
+      "priority": "High",
+      "tasks": [
+        {
+          "id": "task_004_001",
+          "title": "Develop UI for machine connection",
+          "description": "Create UI components for selecting serial port, baud rate, and initiating/terminating connection to the GRBL device. Display connection status.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 8,
+          "dependencies": ["task_003_002", "task_003_006", "task_002_001", "task_003_007"]
+        },
+        {
+          "id": "task_004_002",
+          "title": "Implement UI for displaying real-time machine status",
+          "description": "Develop UI components to display real-time machine status (e.g., Idle, Run, Hold, Alarm), work position (WPos), machine position (MPos), and feed/spindle rates received via WebSocket.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 10,
+          "dependencies": ["task_003_002", "task_003_006"]
+        },
+        {
+          "id": "task_004_003",
+          "title": "Develop UI for console output and command input",
+          "description": "Create a console-like UI to display messages from GRBL and allow users to send manual G-code commands. Include command history.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 8,
+          "dependencies": ["task_003_002", "task_003_006", "task_002_002"]
+        },
+        {
+          "id": "task_004_004",
+          "title": "Implement Jogging controls UI",
+          "description": "Develop UI components for jogging the machine along X, Y, and Z axes with configurable step sizes and feed rates. Remember the 0,0 is top-right.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 10,
+          "dependencies": ["task_003_002", "task_002_002"]
+        },
+        {
+          "id": "task_004_005",
+          "title": "Implement 'Set Zero' (G92 or G10 L20 P0 X0 Y0 Z0) and 'Go to Zero' functionality",
+          "description": "Develop UI buttons and backend logic to set the current work position as zero for X, Y, Z and to command the machine to go to this work zero.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 6,
+          "dependencies": ["task_004_004"]
+        },
+        {
+          "id": "task_004_006",
+          "title": "Implement Homing ($H), Unlock ($X), and Reset (Ctrl+X) commands UI",
+          "description": "Develop UI buttons to send homing, unlock, and software reset commands to the GRBL device.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 6,
+          "dependencies": ["task_003_002", "task_002_002"]
+        },
+        {
+          "id": "task_004_007",
+          "title": "Develop UI for viewing and editing GRBL settings ($$)",
+          "description": "Create a UI to display GRBL settings fetched via '$$' command and allow users to edit and save them (e.g., $0=10).",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 8,
+          "dependencies": ["task_003_002", "task_002_002"]
+        }
+      ]
+    },
+    {
+      "id": "epic_005",
+      "title": "Feature: File Management & G-code Processing",
+      "description": "Implementing features for managing files, converting images to G-code, and processing G-code.",
+      "status": "To Do",
+      "priority": "High",
+      "tasks": [
+        {
+          "id": "task_005_001",
+          "title": "Backend: API endpoints for File (G-code/Image) upload and management (CRUD)",
+          "description": "Develop API endpoints for uploading G-code and image files. Store file metadata in the database (File model) and files on the server or cloud storage. Implement list, retrieve, delete.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 12,
+          "dependencies": ["task_002_004", "task_002_006"]
+        },
+        {
+          "id": "task_005_002",
+          "title": "Frontend: UI for file uploading and management",
+          "description": "Create UI components for users to upload G-code or image files. Display a list of uploaded files, allow selection, and deletion. Associate files with projects.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 10,
+          "dependencies": ["task_003_002", "task_003_007", "task_005_001"]
+        },
+        {
+          "id": "task_005_003",
+          "title": "Backend: G-code streaming and job control logic",
+          "description": "Implement backend logic to stream a selected G-code file line-by-line to the GRBL device. Handle 'ok'/error responses, manage the send queue, and implement pause/resume/stop job commands.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 14,
+          "dependencies": ["task_002_002", "task_005_001"]
+        },
+        {
+          "id": "task_005_004",
+          "title": "Frontend: UI for G-code job control",
+          "description": "Develop UI components to start, pause, resume, and stop a G-code job. Display job progress (e.g., line number, percentage complete).",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 8,
+          "dependencies": ["task_003_002", "task_005_003", "task_003_006"]
+        },
+        {
+          "id": "task_005_005",
+          "title": "Backend: Image-to-G-code conversion module",
+          "description": "Research and implement a Python library or custom logic for converting uploaded images (e.g., PNG, JPG, SVG) into G-code. Allow basic parameter configuration (e.g., scale, feed rate, laser power for engraving).",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 16,
+          "dependencies": ["task_001_002"]
+        },
+        {
+          "id": "task_005_006",
+          "title": "Frontend: UI for image-to-G-code conversion settings",
+          "description": "Create UI components for users to configure parameters for image-to-G-code conversion and initiate the process.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 8,
+          "dependencies": ["task_003_002", "task_005_005"]
+        },
+        {
+          "id": "task_005_007",
+          "title": "Backend: API endpoint for initiating image-to-G-code conversion",
+          "description": "Develop an API endpoint that takes an image ID and conversion parameters, triggers the conversion process, and saves the resulting G-code.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 6,
+          "dependencies": ["task_005_001", "task_005_005"]
+        }
+      ]
+    },
+    {
+      "id": "epic_006",
+      "title": "Feature: Visualizer & Job Simulation",
+      "description": "Developing the G-code visualizer and job simulation capabilities.",
+      "status": "To Do",
+      "priority": "Medium",
+      "tasks": [
+        {
+          "id": "task_006_001",
+          "title": "Research G-code visualization libraries (e.g., three.js, p5.js, or existing G-code viewers)",
+          "description": "Investigate suitable JavaScript libraries for rendering G-code paths in a 2D or 3D view. Consider performance with large G-code files.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 8,
+          "dependencies": ["task_001_003"]
+        },
+        {
+          "id": "task_006_002",
+          "title": "Backend: G-code parsing for visualization",
+          "description": "Develop a Python module to parse G-code files and extract tool path coordinates (X, Y, Z movements), feed rates, and other relevant information for visualization.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 10,
+          "dependencies": ["task_001_002", "task_005_001"]
+        },
+        {
+          "id": "task_006_003",
+          "title": "Backend: API endpoint to provide parsed G-code data for visualizer",
+          "description": "Create an API endpoint that takes a file ID and returns the parsed G-code data in a format suitable for the chosen frontend visualization library.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 6,
+          "dependencies": ["task_006_002"]
+        },
+        {
+          "id": "task_006_004",
+          "title": "Frontend: Implement G-code visualizer component",
+          "description": "Develop a React component that uses the chosen library to render the G-code tool paths. Include basic controls like zoom, pan, and rotate (if 3D). Display on a grid (20mm steps, 0,0 top-right).",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 16,
+          "dependencies": ["task_003_002", "task_006_001", "task_006_003", "task_003_007"]
+        },
+        {
+          "id": "task_006_005",
+          "title": "Frontend: Implement job simulation in visualizer",
+          "description": "Enhance the visualizer to show the tool's progress in real-time (or simulated time) as the G-code job runs or is simulated. Highlight the current G-code line being processed.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 10,
+          "dependencies": ["task_006_004", "task_005_003"]
+        },
+        {
+          "id": "task_006_006",
+          "title": "Frontend: Allow placement and scaling of loaded G-code/images on the visualizer grid",
+          "description": "Implement functionality to drag, drop, and scale the visual representation of the G-code or image on the work area grid before starting a job.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 12,
+          "dependencies": ["task_006_004"]
+        }
+      ]
+    },
+    {
+      "id": "epic_007",
+      "title": "Testing & Quality Assurance",
+      "description": "Writing and executing tests (Unit, Integration, E2E) and ensuring quality.",
+      "status": "To Do",
+      "priority": "Medium",
+      "tasks": [
+        {
+          "id": "task_007_001",
+          "title": "Setup backend testing framework (e.g., Pytest) and write unit tests for core modules",
+          "description": "Configure Pytest and write unit tests for GRBL communication logic, API utility functions, and other critical backend modules. Utilize the mock GRBL controller.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 12,
+          "dependencies": ["task_001_002", "task_002_002", "task_002_008"]
+        },
+        {
+          "id": "task_007_002",
+          "title": "Write integration tests for backend API endpoints",
+          "description": "Develop integration tests to verify the functionality of all major API endpoints, including request/response validation and database interactions.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 10,
+          "dependencies": ["task_002_005", "task_002_006", "task_005_001", "task_007_001"]
+        },
+        {
+          "id": "task_007_003",
+          "title": "Setup frontend testing framework (e.g., Jest, React Testing Library)",
+          "description": "Configure Jest and React Testing Library for the frontend. Write unit tests for utility functions, state management logic, and API service layers.",
+          "status": "To Do",
+          "priority": "High",
+          "assignee": null,
+          "estimatedHours": 8,
+          "dependencies": ["task_001_003", "task_003_001", "task_003_007"]
+        },
+        {
+          "id": "task_007_004",
+          "title": "Write component tests for core UI components",
+          "description": "Develop component tests for reusable UI components and key feature components to ensure they render and behave as expected.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 12,
+          "dependencies": ["task_003_005", "task_007_003"]
+        },
+        {
+          "id": "task_007_005",
+          "title": "Setup E2E testing framework (e.g., Cypress or Playwright)",
+          "description": "Configure an E2E testing framework. Write initial E2E tests for critical user flows such as machine connection, file loading, job execution, and visualization.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 16,
+          "dependencies": ["task_001_005", "task_004_001", "task_005_002", "task_006_004", "task_002_008"]
+        },
+        {
+          "id": "task_007_006",
+          "title": "Develop a comprehensive test plan document",
+          "description": "Create a document outlining the testing strategy, scope, types of tests, environments, and responsibilities for the project.",
+          "status": "To Do",
+          "priority": "Low",
+          "assignee": null,
+          "estimatedHours": 6,
+          "dependencies": []
+        }
+      ]
+    },
+    {
+      "id": "epic_008",
+      "title": "Deployment & Documentation",
+      "description": "Preparing the application for deployment and creating user and developer documentation.",
+      "status": "To Do",
+      "priority": "Medium",
+      "tasks": [
+        {
+          "id": "task_008_001",
+          "title": "Prepare backend for production (e.g., Gunicorn/Uvicorn, environment variables)",
+          "description": "Configure the backend application to run with a production-grade ASGI/WSGI server and manage configurations using environment variables.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 6,
+          "dependencies": ["task_001_002"]
+        },
+        {
+          "id": "task_008_002",
+          "title": "Containerize backend and frontend applications (Docker)",
+          "description": "Create Dockerfiles for both the backend and frontend applications to enable consistent environments and simplify deployment.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 10,
+          "dependencies": ["task_008_001", "task_001_003"]
+        },
+        {
+          "id": "task_008_003",
+          "title": "Setup deployment strategy (e.g., Docker Compose for local/dev, Kubernetes for prod)",
+          "description": "Define and implement a deployment strategy. Start with Docker Compose for local development and testing, and plan for a more robust solution like Kubernetes if needed for production.",
+          "status": "To Do",
+          "priority": "Low",
+          "assignee": null,
+          "estimatedHours": 8,
+          "dependencies": ["task_008_002"]
+        },
+        {
+          "id": "task_008_004",
+          "title": "Enhance CI/CD pipeline for automated builds, tests, and deployments",
+          "description": "Extend the CI/CD pipeline to include building Docker images, running all tests, and automating deployment to staging/production environments.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 12,
+          "dependencies": ["task_001_005", "task_008_002", "task_007_005"]
+        },
+        {
+          "id": "task_008_005",
+          "title": "Write comprehensive user documentation (setup, usage, troubleshooting)",
+          "description": "Create user-facing documentation covering application setup, how to use its features, and common troubleshooting steps. This could be in Markdown or a dedicated documentation site.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 10,
+          "dependencies": []
+        },
+        {
+          "id": "task_008_006",
+          "title": "Write developer documentation (architecture, API, setup, contribution guidelines)",
+          "description": "Create technical documentation for developers, including system architecture, API specifications, local development setup instructions, and guidelines for contributing to the project.",
+          "status": "To Do",
+          "priority": "Medium",
+          "assignee": null,
+          "estimatedHours": 10,
+          "dependencies": []
+        }
+      ]
+    }
+  ],
+  "taskNextId": 53,
+  "epicNextId": 9
+}

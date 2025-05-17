@@ -1,0 +1,37 @@
+/* Réinitialisation des marges et paddings pour maximiser l'espace */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  max-height: 100vh;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  height: calc(100vh - 60px); /* Ajuster en fonction de la hauteur du header et de la barre d'état */
+}
+
+/* Styles pour maximiser l'espace du canvas */
+.visualization-panel {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+  }
+}
