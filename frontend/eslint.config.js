@@ -13,7 +13,7 @@ export default tseslint.config(
     ignores: [
       "dist/",
       "node_modules/",
-      "eslint.config.js",
+      // "eslint.config.js", // REMOVE THIS LINE
       "vite.config.ts",
       // If you have .js files you don't want linted by TS-ESLint, consider ignoring them
       // For example: "**/*.js"
