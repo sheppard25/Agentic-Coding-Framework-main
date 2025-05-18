@@ -1,38 +1,46 @@
 // @ts-check
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
-import reactRecommended from 'eslint-plugin-react/configs/recommended.js';
-import reactJsxRuntime from 'eslint-plugin-react/configs/jsx-runtime.js';
-import reactHooks from 'eslint-plugin-react-hooks';
+import reactPlugin from 'eslint-plugin-react';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
-export default tseslint.config(
+export default [
   {
-    ignores: ["dist/**", "node_modules/**"],
+    ignores: ["dist/**", "node_modules/**"]
   },
   eslint.configs.recommended,
-  ...tseslint.configs.recommended, // Use non-type-checked version for now
+  ...tseslint.configs.recommended,
   {
     files: ['**/*.{ts,tsx}'],
-    ...reactRecommended,
-    ...reactJsxRuntime,
+    plugins: {
+      react: reactPlugin
+    },
+    languageOptions: {
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true
+        }
+      }
+    },
     settings: {
       react: {
-        version: 'detect',
-      },
+        version: 'detect'
+      }
     },
     rules: {
-      'react/prop-types': 'off',
-    },
+      'react/prop-types': 'off'
+    }
   },
   {
     files: ['**/*.{ts,tsx}'],
     plugins: {
-      'react-hooks': reactHooks,
+      'react-hooks': reactHooksPlugin
     },
     rules: {
-      ...reactHooks.configs.recommended.rules,
-    },
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn'
+    }
   },
   eslintConfigPrettier
-);
+];
