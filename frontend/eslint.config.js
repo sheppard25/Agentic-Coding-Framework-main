@@ -5,57 +5,69 @@ import tseslint from 'typescript-eslint';
 import reactRecommended from 'eslint-plugin-react/configs/recommended.js';
 import reactJsxRuntime from 'eslint-plugin-react/configs/jsx-runtime.js';
 import reactHooks from 'eslint-plugin-react-hooks';
-import eslintConfigPrettier from 'eslint-config-prettier'; // To disable ESLint rules that conflict with Prettier
-// import globals from 'globals'; // Uncomment if you need to define global variables
+import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default tseslint.config(
   {
-    ignores: ["dist", "node_modules", "eslint.config.js", "vite.config.ts"], // Added vite.config.ts
+    // Global ignores
+    ignores: [
+      "dist/",
+      "node_modules/",
+      "eslint.config.js",
+      "vite.config.ts",
+      // If you have .js files you don't want linted by TS-ESLint, consider ignoring them
+      // For example: "**/*.js"
+    ],
   },
-  eslint.configs.recommended, // ESLint's built-in recommended rules
-  ...tseslint.configs.recommendedTypeChecked, // TypeScript specific rules (type-aware)
-  // OR for non-type-aware: ...tseslint.configs.recommended,
-  { // React specific settings
-    files: ['**/*.{ts,tsx}'],
-    ...reactRecommended,
-    ...reactJsxRuntime,
+
+  // 1. Base ESLint recommended rules (for general JavaScript)
+  eslint.configs.recommended,
+
+  // 2. TypeScript type-aware linting configuration
+  // This spread includes the TypeScript parser, plugin, and recommended type-checked rules.
+  // It applies to .ts, .tsx, .mts, .cts files.
+  ...tseslint.configs.recommendedTypeChecked,
+  // This separate config object provides the necessary parserOptions for type-aware linting.
+  {
     languageOptions: {
-      ...reactRecommended.languageOptions,
       parserOptions: {
-        project: true, // Enable type-aware linting
-        tsconfigRootDir: import.meta.dirname, // Or your frontend project root
+        project: true, // Crucial for type-aware rules
+        tsconfigRootDir: import.meta.dirname, // Assumes tsconfig.json is in 'frontend/'
       },
-      // globals: { // Example for browser globals
-      //   ...globals.browser,
-      // },
     },
+    // You can add/override specific type-aware rules here if needed
+    // rules: {
+    //   '@typescript-eslint/no-floating-promises': 'error',
+    // },
+  },
+
+  // 3. React specific settings
+  {
+    files: ['src/**/*.{ts,tsx}'], // Apply React rules primarily to files in src/
+    ...reactRecommended, // Base React recommended rules
+    ...reactJsxRuntime, // For the new JSX transform
     settings: {
       react: {
-        version: 'detect',
+        version: 'detect', // Automatically detect React version
       },
     },
     rules: {
-      // Your specific React rules or overrides
-      'react/prop-types': 'off', // Often not needed with TypeScript
+      'react/prop-types': 'off', // Often turned off in TypeScript projects
+      // Add any other React specific rule overrides here
     },
   },
-  { // Configuration for React Hooks plugin
-    files: ['**/*.{ts,tsx}'],
+
+  // 4. React Hooks plugin configuration
+  {
+    files: ['src/**/*.{ts,tsx}'], // Apply to the same files as React settings
     plugins: {
       'react-hooks': reactHooks,
     },
     rules: {
-      ...reactHooks.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules, // Recommended rules for React Hooks
     },
   },
-  { // Configuration for React Refresh plugin (optional, Vite handles much of this)
-    files: ['**/*.{ts,tsx}'],
-    plugins: {
-      // 'react-refresh': eslintPluginReactRefresh (if you installed and imported it)
-    },
-    rules: {
-      // 'react-refresh/only-export-components': 'warn', // Example rule
-    }
-  },
-  eslintConfigPrettier // This should be last to override other configs
+
+  // 5. Prettier configuration (must be the last one to override other formatting rules)
+  eslintConfigPrettier
 );
